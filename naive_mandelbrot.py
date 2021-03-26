@@ -1,8 +1,9 @@
 import time
 from PIL import Image, ImageDraw
+from math import log, log2
 
 
-def mandelbrot(c):
+def mandelbrot(c, renormalize_escape=True):
     """
     two coords instead of complex implementation, something is wrong with it dunno
     z_r = 0
@@ -21,7 +22,11 @@ def mandelbrot(c):
             return i
         z = z**2 + c
 
-    return i
+    if renormalize_escape:
+        return i + 1 - log(log2(abs(z)))
+        
+    else:
+        return i
 
 
 
@@ -39,14 +44,15 @@ def precalculate_coordinates(width, height):
 
 if __name__ == '__main__':
     start_time = time.process_time()
-    max_iterations = 256
+    max_iterations = 1000
     # Image size (pixels)
     width = 640
     height = 480
 
-    color_factor = 255 / max_iterations
+    hue_factor = 255 / max_iterations
+    saturation = 255
 
-    im = Image.new('RGB', (width, height), (0, 0, 0))
+    im = Image.new('HSV', (width, height), (0, 0, 0))
     draw = ImageDraw.Draw(im)
 
     reals, imags = precalculate_coordinates(width, height)
@@ -55,12 +61,13 @@ if __name__ == '__main__':
         for i, y in imags:
             c = complex(r, i)
             m = mandelbrot(c)
-            color = 255 - int(m * color_factor)
-            draw.point([x, y], (color, color, color))
+            hue = int(hue_factor * m)
+            value = 255 if m < max_iterations else 0
+            draw.point([x, y], (hue, saturation, value))
 
     process_time = time.process_time() - start_time
     print(process_time)
     with open('timing.txt', 'a') as outfile:
-        outfile.write(f'{process_time}, {width}, {height}, back to complex' + '\n')
+        outfile.write(f'{process_time}, {width}, {height}, {max_iterations}, changing coloring to HSV' + '\n')
     im.show('output.png', 'PNG')
-    im.save('output.png', 'PNG')
+    im.convert('RGB').save('plots/output.png', 'PNG')

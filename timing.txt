@@ -1,12 +1,22 @@
-time spent, width, height, comment
-4.875, 640, 480, just running naive mandelbrot
-4.8125, 640, 480, moved constants out of loops
-4.8125, 640, 480, moved constants out of loops
-4.796875, 640, 480, precalculating coordinates
-4.28125, 640, 480, changing while to for loop
-3.96875, 640, 480, changing from complex to two floats
-3.96875, 640, 480, changing from complex to two floats
-3.890625, 640, 480, image not correct now
-4.453125, 640, 480, image not correct now
-4.109375, 640, 480, image not correct now
-4.40625, 640, 480, back to complex
+time spent, width, height, max iterations, comment
+4.875, 640, 480, 256, just running naive mandelbrot
+4.8125, 640, 480, 256, moved constants out of loops
+4.8125, 640, 480, 256, moved constants out of loops
+4.796875, 640, 480, 256, precalculating coordinates
+4.28125, 640, 480, 256, changing while to for loop
+3.96875, 640, 480, 256, changing from complex to two floats
+3.96875, 640, 480, 256, changing from complex to two floats
+3.890625, 640, 480, 256, image not correct now
+4.453125, 640, 480, 256, image not correct now
+4.109375, 640, 480, 256, image not correct now
+4.40625, 640, 480, 256, back to complex
+4.359375, 640, 480, 256, changing coloring to HSV
+4.421875, 640, 480, 256, changing coloring to HSV
+4.359375, 640, 480, 256, changing coloring to HSV
+4.390625, 640, 480, 256, changing coloring to HSV
+4.390625, 640, 480, 256, changing coloring to HSV
+4.359375, 640, 480, 256, changing coloring to HSV
+4.484375, 640, 480, 256, changing coloring to HSV
+4.46875, 640, 480, 256, changing coloring to HSV
+4.453125, 640, 480, 256, changing coloring to HSV
+4.46875, 640, 480, 256, changing coloring to HSV
