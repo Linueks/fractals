@@ -1,1 +1,12 @@
-time spent, comment
+time spent, width, height, comment
+4.875, 640, 480, just running naive mandelbrot
+4.8125, 640, 480, moved constants out of loops
+4.8125, 640, 480, moved constants out of loops
+4.796875, 640, 480, precalculating coordinates
+4.28125, 640, 480, changing while to for loop
+3.96875, 640, 480, changing from complex to two floats
+3.96875, 640, 480, changing from complex to two floats
+3.890625, 640, 480, image not correct now
+4.453125, 640, 480, image not correct now
+4.109375, 640, 480, image not correct now
+4.40625, 640, 480, back to complex
