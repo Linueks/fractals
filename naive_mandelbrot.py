@@ -1,6 +1,8 @@
 import time
 from PIL import Image, ImageDraw
 from math import log, log2
+import numpy as np
+from imageio import imwrite
 
 
 def mandelbrot(c, renormalize_escape=True):
@@ -23,11 +25,29 @@ def mandelbrot(c, renormalize_escape=True):
         z = z**2 + c
 
     if renormalize_escape:
-        return i + 1 - log(log2(abs(z)))
-        
+        return i + 1 - log(abs(z)) / log(2)
+
     else:
         return i
 
+
+
+def numpy_mandelbrot(width, height):
+    x = np.linspace(-2.5, 1, width).reshape((1, width))
+    y = np.linspace(-1, 1, height).reshape((height, 1))
+    c = np.tile(x, (height, 1)) + 1j * np.tile(y, (1, width))
+
+    z = np.zeros(c.shape, dtype=np.complex128)
+    #divergence_time = np.zeros(z.shape, dtype=int)
+    divergence_mask = np.full(z.shape, True, dtype=bool)
+    for i in range(max_iterations):
+        z[divergence_mask] = z[divergence_mask]*z[divergence_mask] + c[divergence_mask]
+        #diverged = np.greater(np.abs, 2, out=np.full(z.shape, False))
+        #divergence_time[diverged] = i
+        #print(i)
+        divergence_mask[np.abs(z) > 2] = False
+
+    imwrite('plots/numpy_output.png', np.uint8(np.flipud(1 - divergence_mask) * 255))
 
 
 def precalculate_coordinates(width, height):
@@ -42,13 +62,8 @@ def precalculate_coordinates(width, height):
     return reals, imags
 
 
-if __name__ == '__main__':
-    start_time = time.process_time()
-    max_iterations = 1000
-    # Image size (pixels)
-    width = 640
-    height = 480
 
+def run_naive():
     hue_factor = 255 / max_iterations
     saturation = 255
 
@@ -65,9 +80,18 @@ if __name__ == '__main__':
             value = 255 if m < max_iterations else 0
             draw.point([x, y], (hue, saturation, value))
 
+    #im.show('output.png', 'PNG')
+    im.convert('RGB').save('plots/output.png', 'PNG')
+
+
+if __name__ == '__main__':
+    max_iterations = 256
+    # Image size (pixels)
+    width = 3840
+    height = 2160
+    start_time = time.process_time()
+    numpy_mandelbrot(width, height)
     process_time = time.process_time() - start_time
     print(process_time)
     with open('timing.txt', 'a') as outfile:
-        outfile.write(f'{process_time}, {width}, {height}, {max_iterations}, changing coloring to HSV' + '\n')
-    im.show('output.png', 'PNG')
-    im.convert('RGB').save('plots/output.png', 'PNG')
+        outfile.write(f'{process_time}, {width}, {height}, {max_iterations}, 4k numpy' + '\n')
