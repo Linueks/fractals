@@ -20,3 +20,23 @@ time spent, width, height, max iterations, comment
 4.46875, 640, 480, 256, changing coloring to HSV
 4.453125, 640, 480, 256, changing coloring to HSV
 4.46875, 640, 480, 256, changing coloring to HSV
+17.28125, 640, 480, 1000, changing coloring to HSV
+4.6875, 640, 480, 256, adding color smoothing
+5.640625, 640, 480, 256, adding color smoothing
+5.546875, 640, 480, 256, adding color smoothing
+4.75, 640, 480, 256, adding color smoothing
+124.765625, 3840, 2160, 256, adding color smoothing
+4.703125, 640, 480, 256, adding color smoothing
+4.8125, 640, 480, 256, adding color smoothing
+0.015625, 640, 480, 256, implementing numpy function
+0.0, 640, 480, 256, implementing numpy function
+0.0, 640, 480, 256, implementing numpy function
+0.015625, 640, 480, 256, implementing numpy function
+0.03125, 640, 480, 256, implementing numpy function
+1.578125, 640, 480, 256, implementing numpy function
+1.625, 640, 480, 256, implementing numpy function
+2.28125, 640, 480, 256, implementing numpy function
+2.203125, 640, 480, 256, implementing numpy function
+1.234375, 640, 480, 256, implementing numpy function
+1.25, 640, 480, 256, got it working
+34.4375, 3840, 2160, 256, 4k numpy
